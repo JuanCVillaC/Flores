@@ -1,0 +1,103 @@
+/* Estilos Generales y Vista Móvil (Mobile-First) */
+html {
+  scroll-behavior: smooth; /* Comportamiento de desplazamiento suave por defecto */
+}
+
+body {
+  font-family: sans-serif;
+  margin: 20px;
+  background-color: #f0f0f0; /* Un color de fondo base claro */
+  color: #333;
+}
+
+header, footer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+img {
+  max-width: 100%; /* Asegura que las imágenes nunca se desborden de su contenedor */
+  height: auto;   /* Mantiene la proporción de la imagen */
+  display: block; /* Elimina espacios extra debajo de las imágenes */
+}
+
+figure {
+  margin: 0; /* Elimina el margen por defecto de las figuras */
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+figcaption {
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Requerimiento: Rejilla de una columna con 10px de espacio */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Una sola columna */
+  gap: 10px;                  /* Espacio de 10px entre elementos */
+}
+
+
+/* --- Media Queries --- */
+
+/* 1. Vista de Tableta */
+@media (min-width: 772px) {
+  /* Requerimiento: Rejilla de dos columnas */
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Requerimiento: Figuras con forma circular */
+  .grid figure {
+    border-radius: 50%;
+    overflow: hidden; /* Oculta las esquinas de la imagen que se salen del círculo */
+  }
+
+  /* Requerimiento: La última figura ocupa ambas columnas */
+  .grid figure:last-child {
+    grid-column: span 2;
+    border-radius: 0; /* Opcional pero recomendado: quitar el círculo si abarca dos columnas */
+  }
+}
+
+
+/* 2. Vista de Pantalla Grande */
+@media (min-width: 992px) {
+  /* Requerimiento: Cada tercera figura ocupa ambas columnas */
+  .grid figure:nth-child(3n) {
+    grid-column: span 2;
+  }
+  
+  /* Requerimiento: Eliminar el radio del borde de todas las figuras */
+  .grid figure {
+    border-radius: 0;
+  }
+}
+
+
+/* 3. Preferencia de Movimiento Reducido */
+@media (prefers-reduced-motion: reduce) {
+  /* Requerimiento: Eliminar el comportamiento de desplazamiento suave */
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* 4. Preferencia de Esquema de Color Oscuro (Modo Oscuro) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #f1f1f1;
+  }
+  
+  /* Requerimientos para las figuras en modo oscuro */
+  .grid figure {
+    background-color: #2a2a2a;  /* Color de fondo oscuro */
+    color: #f0e68c;             /* Color de fuente claro (amarillento/khaki) */
+    border-color: #000000;      /* Color del borde negro */
+  }
+}
